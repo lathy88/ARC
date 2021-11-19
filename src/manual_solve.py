@@ -85,6 +85,7 @@ def solve_c3f564a4(x):
 
 
 def find_right_colour(x, row, col):
+    # Base case: if the cell value is non-zero, return that value
     if x[row, col] != 0:
         return x[row, col]
     if row < x.shape[0] and col > -1:
@@ -92,6 +93,114 @@ def find_right_colour(x, row, col):
         y_col = col + 1
         x[row, col] = find_right_colour(x, x_row, y_col)
     return x[row, col]
+
+
+def solve_5c2c9af4(x):
+    """
+    Required Transformation: The input contains 3 cells with non-zero value. The non-zero valued cells are diagonally
+    positioned with some amount of gap between each non-zero valued cells. The program should identify the colour and
+    their position in the grid and form a squared box around the centered non-zero valued cell. Each squared box should
+    be of equal width between the previous one.
+
+    Implementation: The solution is to identify the coloured cells in the grid and form a squared boxes around centered
+    cell (non-zero valued cell). The Width should be same between each squared box, where width is measured by the
+    difference between the number of rows or columns between 2 consecutive non-zero valued cells.
+    The non-zero valued cells can be arranged in 2 forms,
+    1. Up Slope
+    2. Down Slope
+    In the case of Up slope, once the first non-zero valued cell is identified, the pattern to fill the cells are as
+    follows,
+    RIGHT, DOWN, LEFT, UP
+    Whereas in the case of Down Slope, once the first non-zero valued cell is identified, the pattern to fill the cells
+    are as follows,
+    DOWN, LEFT, UP, RIGHT
+    After one full rotation, the row & column is recalculated based on the width.This process is repeated until the
+    row & column goes out of the grid.
+
+    Training & Test Grid: The solution works on all Training & Test cases
+
+    """
+    non_zero_indexes = np.nonzero(x)
+    non_zero_row_array = non_zero_indexes[0]
+    non_zero_col_array = non_zero_indexes[1]
+    # Difference between the columns of first & second non-zero valued cell
+    width = non_zero_col_array[0] - non_zero_col_array[1]
+    row, col = non_zero_row_array[0], non_zero_col_array[0]
+    # Centered non-zero Valued cell. This cell will become the reference point for all the squared boxes in the grid
+    midpoint_loc = (non_zero_row_array[1], non_zero_col_array[1])
+    value = x[non_zero_row_array[1], non_zero_col_array[1]]
+    # Assign the initial width to Original Width because the width values increases as the size of the square increase.
+    original_width = width
+    while True:
+        if width > 0:
+            # Up Slope: down, left, up, right
+            row, col = travel_down(x, row, col, midpoint_loc[0], abs(width), value)
+            row, col = travel_left(x, row, col, midpoint_loc[1], abs(width), value)
+            row, col = travel_up(x, row, col, midpoint_loc[0], abs(width), value)
+            row, col = travel_right(x, row, col, midpoint_loc[1], abs(width), value)
+            # Recalculate the rows & column based on the original width. Because each square should have same width
+            row, col = row - abs(original_width), col + abs(original_width)
+        else:
+            # Down Slope: right, down, left, up
+            row, col = travel_right(x, row, col, midpoint_loc[1], abs(width), value)
+            row, col = travel_down(x, row, col, midpoint_loc[0], abs(width), value)
+            row, col = travel_left(x, row, col, midpoint_loc[1], abs(width), value)
+            row, col = travel_up(x, row, col, midpoint_loc[0], abs(width), value)
+            # Recalculate the rows & column based on the original width. Because each square should have same width
+            row, col = row - abs(original_width), col - abs(original_width)
+        width = width + original_width
+        # If the rows or columns exceed beyond the grid size terminate the loop.
+        if (row < -1 and col < -1) or (row < -1 and col > x[0].shape[0]):
+            break
+    return x
+
+
+def travel_right(x, row, col, center, width, value):
+    while col < x[0].shape[0]:
+        col = col + 1
+        if -1 < row < x.shape[0] and col < x[0].shape[0]:
+            x[row, col] = value
+        # Check if the difference between column & the column of center cell is same as width, then we reached the
+        # boundary for that square so break the loop
+        if abs(col - center) == width:
+            break
+    return row, col
+
+
+def travel_down(x, row, col, center, width, value):
+    while row < x.shape[0]:
+        row = row + 1
+        if -1 < row < x.shape[0] and col < x[0].shape[0]:
+            x[row, col] = value
+        # Check if the difference between row & the row of center cell is same as width, then we reached the
+        # boundary for that square so break the loop
+        if abs(row - center) == width:
+            break
+    return row, col
+
+
+def travel_left(x, row, col, center, width, value):
+    while col > -1:
+        col = col - 1
+        if -1 < row < x.shape[0] and x[0].shape[0] > col > -1:
+            x[row, col] = value
+        # Check if the difference between column & the column of center cell is same as width, then we reached the
+        # boundary for that square so break the loop
+        if abs(col - center) == width:
+            break
+    return row, col
+
+
+def travel_up(x, row, col, center, width, value):
+    while row > -1:
+        row = row - 1
+        if row > -1 and col > -1:
+            x[row, col] = value
+        # Check if the difference between row & the row of center cell is same as width, then we reached the
+        # boundary for that square so break the loop
+        if abs(row - center) == width:
+            break
+    return row, col
 
 
 def main():

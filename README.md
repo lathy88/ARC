@@ -86,3 +86,11 @@ the colour pattern from the grid and fill the corresponding black coloured regio
 
 ![Alt text](img/c3f564a4.png?raw=true "c3f564a4")
 
+#### 3.5c2c9af4:
+<i>Example Training data:<br>
+In the example below, the input contains 3 cells with non-zero value and the output should generate the squared boxes around the
+centered cell by equal spacing between each squared box.
+
+![Alt text](img/5c2c9af4.png?raw=true "5c2c9af4")
+
+
