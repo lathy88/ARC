@@ -10,7 +10,11 @@ Name: Lathishbabu Ganesan
 ID: 21249312
 GitHub Link: https://github.com/lathy88/ARC
 
-Summary:
+Summary: 
+1. The first two functions uses numpy N- Dimensional iterator to iterate the 2D array. This iterates each row in 
+the grid and corresponding columns in each row.
+2. The second program uses recursion to backtrack the rows & columns until non-zero valued cell is found.
+3. The third program uses infinite loop to generate the squared boxes until the rows & columns exceed the grid boundary.
 
 """
 
