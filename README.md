@@ -64,3 +64,18 @@ When your output grid is ready, click the green "Submit!" button to check your a
 After you've obtained the correct answer for the current test input grid, you can switch to the next test input grid for the task using the "Next test input" button (if there is any available; most tasks only have one test input).
 
 When you're done with a task, use the "load task" button to open a new task.
+
+### Solutions
+
+In the manual_solve.py, solution for 3 Moderate to Difficult problems are available. The solve_* functions tries to solve below problems,
+1. 868de0fa
+2. c3f564a4
+3. 5c2c9af4
+
+### Problem ID with Short description:
+#### 868de0fa:
+<i>Example Training data:<br>
+In the example below, the input contains square boxes and the output should fill the space inside square box with Red or Orange
+based on the even or odd number of cells inside the square box.
+![Alt text](img/868de0fa.png?raw=true "868de0fa")
+
