@@ -73,9 +73,15 @@ In the manual_solve.py, solution for 3 Moderate to Difficult problems are availa
 3. 5c2c9af4
 
 ### Problem ID with Short description:
-#### 868de0fa:
+#### 1.868de0fa:
 <i>Example Training data:<br>
 In the example below, the input contains square boxes and the output should fill the space inside square box with Red or Orange
 based on the even or odd number of cells inside the square box.
 ![Alt text](img/868de0fa.png?raw=true "868de0fa")
+
+#### 1.c3f564a4:
+<i>Example Training data:<br>
+In the example below, the input contains grid full of colour patterns with few black coloured regions and the output should identify
+the colour pattern from the grid and fill the corresponding black coloured regions with appropriate colours.
+![Alt text](img/c3f564a4.png?raw=true "c3f564a4")
 

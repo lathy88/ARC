@@ -46,7 +46,7 @@ def solve_868de0fa(x):
             while col < x[0].shape[0] - 1 and x[row, col] != 1:
                 col = col + 1
                 counter = counter + 1
-        # Fill the entire row within the square boundary with 2 or 7 based on the even/odd cells inside the square
+            # Fill the entire row within the square boundary with 2 or 7 based on the even/odd cells inside the square
             if counter % 2 == 0:
                 col = i_col + 1
                 # Even square so fill it with 2
@@ -60,6 +60,38 @@ def solve_868de0fa(x):
                     x[row, col] = 7
                     col = col + 1
     return x
+
+
+def solve_c3f564a4(x):
+    """
+    Required Transformation: The input contains a specific colour pattern with some black region (Groups of cells with
+    black colour). The program should identify the pattern in the grid and fill the corresponding black coloured cells
+    with the suitable colour. The Grid can contain 1 or many group of black coloured region.
+
+    Implementation: The solution is to figure out the pattern from the grid. First the program should identify the cell
+    with 0 value. i.e it corresponds to cell with black colour. Once the first black coloured cell is identified, the
+    program calls the support function find_right_colour to find the colour sequence of the black coloured region.
+    The find_right_colour is a recursive function where it recursively go back to the previous row and next column until
+    non-zero cell is encountered. This non-zero value is the colour we need to fill for the cell when the recursive
+    function returns.
+
+    Training & Test Grid: The solution works on all Training & Test cases
+
+    """
+    for i_row, i_col in np.ndindex(x.shape):
+        if x[i_row, i_col] == 0:
+            find_right_colour(x, i_row, i_col)
+    return x
+
+
+def find_right_colour(x, row, col):
+    if x[row, col] != 0:
+        return x[row, col]
+    if row < x.shape[0] and col > -1:
+        x_row = row - 1
+        y_col = col + 1
+        x[row, col] = find_right_colour(x, x_row, y_col)
+    return x[row, col]
 
 
 def main():
