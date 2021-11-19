@@ -79,9 +79,10 @@ In the example below, the input contains square boxes and the output should fill
 based on the even or odd number of cells inside the square box.
 ![Alt text](img/868de0fa.png?raw=true "868de0fa")
 
-#### 1.c3f564a4:
+#### 2.c3f564a4:
 <i>Example Training data:<br>
 In the example below, the input contains grid full of colour patterns with few black coloured regions and the output should identify
 the colour pattern from the grid and fill the corresponding black coloured regions with appropriate colours.
+
 ![Alt text](img/c3f564a4.png?raw=true "c3f564a4")
 
