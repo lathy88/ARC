@@ -15,6 +15,8 @@ Summary:
 the grid and corresponding columns in each row.
 2. The second program uses recursion to backtrack the rows & columns until non-zero valued cell is found.
 3. The third program uses infinite loop to generate the squared boxes until the rows & columns exceed the grid boundary.
+In short all 3 programs tries to solve the logic in different ways. Program 1 & 2 uses similar loop to iterate the
+elements.
 
 """
 
